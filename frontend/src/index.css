@@ -1,8 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --boxShadowColor: rgb(54 74 99 / 5%);
+  --iconColor: rgba(0, 0, 0, 0.54);
+  --lightBackground: rgb(245, 246, 250);
+  --primaryBorder: #e5e9f2;
+  --primaryColor: #4f4f76;
+  --primaryText: #333;
+  --white: #fff;
+
+  --zIndex1: 1111;
+}
+
 body {
+  font-family: 'Inter', serif;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
