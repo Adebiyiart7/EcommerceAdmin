@@ -16,9 +16,16 @@ import MenuItem from "../common/MenuItem";
 import customScrollBar from "../../utilities/customScrollBar";
 
 const useStyles = makeStyles({
-  leftMenu: customScrollBar(),
+  leftMenu: {
+    height: "100vh",
+    overflowY: "scroll",
+    padding: 16,
+    boxShadow: "3px 0px 3px 0px var(--boxShadowColor)",
+    borderRight: "1px solid var(--primaryBorder)",
+    ...customScrollBar(),
+  },
   menuItems: {
-    marginTop: 70,
+    margin: "70px 0",
   },
   menuLink: {
     textDecoration: "none",
@@ -38,11 +45,6 @@ const LeftMenu = () => {
   const inlineStyles = {
     leftMenu: {
       minWidth: leftMenuWidth,
-      height: "100vh",
-      // overflowY: "scroll",
-      padding: 16,
-      boxShadow: "3px 0px 3px 0px var(--boxShadowColor)",
-      borderRight: "1px solid var(--primaryBorder)",
     },
   };
 
