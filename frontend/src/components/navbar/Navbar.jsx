@@ -32,7 +32,6 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     padding: 16,
     borderBottom: "1px solid var(--primaryBorder)",
-    boxShadow: "0 3px 3px 0 var(--boxShadowColor)",
     alignItems: "center",
   },
 });

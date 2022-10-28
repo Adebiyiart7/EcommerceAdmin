@@ -4,7 +4,9 @@
   --boxShadowColor: rgb(54 74 99 / 5%);
   --iconColor: rgba(0, 0, 0, 0.54);
   --lightBackground: rgb(245, 246, 250);
+  --lightText: rgba(0, 0, 0, 0.644);
   --primaryBorder: #e5e9f2;
+  --primaryBoxShadow: 0 0 5px 0 var(--boxShadowColor);
   --primaryColor: #4f4f76;
   --primaryText: #333;
   --secondaryColor: #ff3e1d;

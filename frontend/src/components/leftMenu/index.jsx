@@ -19,7 +19,6 @@ const useStyles = makeStyles({
     height: "100vh",
     overflowY: "scroll",
     padding: 16,
-    boxShadow: "3px 0px 3px 0px var(--boxShadowColor)",
     borderRight: "1px solid var(--primaryBorder)",
     ...customScrollBar(),
   },

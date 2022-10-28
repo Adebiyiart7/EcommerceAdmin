@@ -1,19 +1,34 @@
 // NODE_MODULES
+import { Container } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   contentContainer: {
-    padding: 30,
     backgroundColor: "var(--lightBackground)",
-  }
-})
+  },
+});
 
-const ContentContainer = ({children}) => {
+const ContentContainer = ({ children, mediaQueries }) => {
+  const { largeDown } = mediaQueries;
   const classes = useStyles();
 
-  return (
-    <div className={classes.contentContainer}>{children}</div>
-  )
-}
+  const inlineStyles = {
+    container: {
+      padding: largeDown && 0
+    },
+    contentContainer: {
+      padding: largeDown ? 16 : 30,
+    },
+  };
 
-export default ContentContainer
+  return (
+    <div
+      className={classes.contentContainer}
+      style={inlineStyles.contentContainer}
+    >
+      <Container sx={inlineStyles.container}>{children}</Container>
+    </div>
+  );
+};
+
+export default ContentContainer;
