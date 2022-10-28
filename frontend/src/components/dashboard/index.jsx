@@ -11,6 +11,7 @@ import { Grid } from "@mui/material";
 import { MdGroups } from "react-icons/md";
 import { BsCreditCard } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
+import SalesStats from "../common/SalesStats";
 
 const useStyles = makeStyles({
   dashboard: {
@@ -65,6 +66,7 @@ const Dashboard = ({ mediaQueries }) => {
               />
             </Grid>
           </Grid>
+          <SalesStats mediaQueries={mediaQueries} />
         </ContentContainer>
         <Footer />
       </div>
