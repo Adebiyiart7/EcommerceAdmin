@@ -32,18 +32,27 @@ const useStyles = makeStyles({
   },
 });
 
-const LeftMenu = () => {
+const LeftMenu = ({
+  leftMenuWidth,
+  setLeftMenuWidth,
+  showLeftMenu,
+  setShowLeftMenu,
+  mediaQueries,
+}) => {
+  const { tabletDown } = mediaQueries;
   const [iconOnly, setIconOnly] = useState(false);
-  const [leftMenuWidth, setLeftMenuWidth] = useState(260);
   const classes = useStyles();
 
   const showDetailedLeftMenu = () => {
     setIconOnly(false);
     setLeftMenuWidth(260);
   };
-
+  
   const inlineStyles = {
     leftMenu: {
+      position: "relative",
+      left: showLeftMenu ? 0 : -300,
+      transition: ".3s",
       minWidth: leftMenuWidth,
     },
   };
@@ -55,10 +64,12 @@ const LeftMenu = () => {
       onMouseOver={showDetailedLeftMenu}
     >
       <TopNav
+        setShowLeftMenu={setShowLeftMenu}
         setLeftMenuWidth={setLeftMenuWidth}
         leftMenuWidth={leftMenuWidth}
         iconOnly={iconOnly}
         setIconOnly={setIconOnly}
+        mediaQueries={mediaQueries}
       />
       <div className={classes.menuItems}>
         <Link className={classes.menuLink} to="/">

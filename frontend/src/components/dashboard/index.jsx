@@ -14,7 +14,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Dashboard = () => {
+const Dashboard = ({mediaQueries}) => {
   const classes = useStyles();
 
   const inlineStyles = {
@@ -26,7 +26,6 @@ const Dashboard = () => {
 
   return (
     <div className={classes.dashboard}>
-      <Navbar />
       <div style={inlineStyles.scrollView}>
         <ContentContainer>
           <PageTitle title="Dashboard" />

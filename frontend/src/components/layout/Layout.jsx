@@ -1,8 +1,10 @@
 // NODE_MODULE
 import { makeStyles } from "@mui/styles";
+import { useState, useEffect } from "react";
 
 // LOCAL IMPORT
 import LeftMenu from "../leftMenu";
+import Navbar from "../navbar/Navbar";
 
 const useStyles = makeStyles({
   layout: {
@@ -14,12 +16,37 @@ const useStyles = makeStyles({
 });
 
 const Layout = ({ mediaQueries, content }) => {
+  const { tabletDown } = mediaQueries;
+  const [leftMenuWidth, setLeftMenuWidth] = useState(260);
+  const [showLeftMenu, setShowLeftMenu] = useState(true);
   const classes = useStyles();
 
+  useEffect(() => {
+    if (tabletDown) {
+      setShowLeftMenu(false);
+    }
+  }, [tabletDown])
+  
   return (
     <div className={classes.layout}>
-      <LeftMenu />
-      <main className={classes.mainContent}>{content}</main>
+      {showLeftMenu && (
+        <LeftMenu
+          leftMenuWidth={leftMenuWidth}
+          setLeftMenuWidth={setLeftMenuWidth}
+          showLeftMenu={showLeftMenu}
+          setShowLeftMenu={setShowLeftMenu}
+          mediaQueries={mediaQueries}
+        />
+      )}
+      <main className={classes.mainContent}>
+        <Navbar
+          setLeftMenuWidth={setLeftMenuWidth}
+          showLeftMenu={showLeftMenu}
+          setShowLeftMenu={setShowLeftMenu}
+          mediaQueries={mediaQueries}
+        />
+        {content}
+      </main>
     </div>
   );
 };

@@ -3,10 +3,10 @@ import { makeStyles } from "@mui/styles";
 import { BiNotification } from "react-icons/bi";
 import { TbMessages } from "react-icons/tb";
 import { IconButton, TextField } from "@mui/material";
-
 // LOCAL IMPORTS
 import User from "./User";
 import { IoSearch } from "react-icons/io5";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const useStyles = makeStyles({
   icon: {
@@ -23,7 +23,7 @@ const useStyles = makeStyles({
   search: {
     display: "flex",
     alignItems: "center",
-    width: "70%"
+    width: "70%",
   },
   topNavbar: {
     display: "flex",
@@ -36,8 +36,22 @@ const useStyles = makeStyles({
   },
 });
 
-const Navbar = () => {
+const Navbar = ({
+  mediaQueries,
+  setLeftMenuWidth,
+  showLeftMenu,
+  setShowLeftMenu,
+}) => {
+  const { largeUp, tabletDown, media900Up } = mediaQueries;
   const classes = useStyles();
+
+  const handleShowLeftMenu = () => {
+    if (showLeftMenu) {
+      setLeftMenuWidth(260);
+    }
+    
+    setShowLeftMenu(!showLeftMenu);
+  };
 
   return (
     <nav className={classes.topNavbar}>
@@ -48,14 +62,13 @@ const Navbar = () => {
             color="var(--primaryColor)"
           />
         </IconButton>
-        <TextField
+        {largeUp && <TextField
           className={classes.input}
           placeholder="Search anything..."
           type="search"
           size="small"
           fullWidth
-          
-        />
+        />}
       </div>
       <div className={classes.rightItems}>
         <IconButton className={classes.icon}>
@@ -64,7 +77,12 @@ const Navbar = () => {
         <IconButton className={classes.icon}>
           <TbMessages color="var(--primaryColor)" size={24} />
         </IconButton>
-        <User />
+        {tabletDown && (
+          <IconButton onClick={handleShowLeftMenu} className={classes.icon}>
+            <GiHamburgerMenu color="var(--primaryColor)" size={24} />
+          </IconButton>
+        )}
+        <User media900Up={media900Up} />
       </div>
     </nav>
   );

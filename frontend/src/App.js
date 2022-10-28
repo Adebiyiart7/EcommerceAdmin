@@ -15,6 +15,7 @@ function App() {
     mediumDown: useMediaQuery(theme.breakpoints.down(375)),
     largeDown: useMediaQuery(theme.breakpoints.down(425)),
     tabletDown: useMediaQuery(theme.breakpoints.down(768)),
+    media900Down: useMediaQuery(theme.breakpoints.down(900)),
     laptopDown: useMediaQuery(theme.breakpoints.down(1024)),
     laptopLargeDown: useMediaQuery(theme.breakpoints.down(1440)),
 
@@ -22,6 +23,7 @@ function App() {
     mediumUp: useMediaQuery(theme.breakpoints.up(375)),
     largeUp: useMediaQuery(theme.breakpoints.up(425)),
     tabletUp: useMediaQuery(theme.breakpoints.up(768)),
+    media900Up: useMediaQuery(theme.breakpoints.up(900)),
     laptopUp: useMediaQuery(theme.breakpoints.up(1024)),
     laptopLargeUp: useMediaQuery(theme.breakpoints.up(1440)),
   };

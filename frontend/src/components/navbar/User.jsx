@@ -15,6 +15,7 @@ const useStyles = makeStyles({
     alignItems: "center",
     color: "var(--primaryColor)",
     fontWeight: 600,
+    whiteSpace: "nowrap",
   },
   permission: {
     fontWeight: 500,
@@ -26,21 +27,21 @@ const useStyles = makeStyles({
     flexDirection: "row",
     marginLeft: 5,
     cursor: "pointer",
-    width: 185,
+    // width: 185,
   },
   
 })
 
-const User = () => {
+const User = ({media900Up}) => {
   const classes = useStyles();
 
   return (
     <div className={classes.user}>
       <Avatar sx={{width: 35, height: 35, backgroundColor:"var(--primaryColor)"}} />
-      <div className={classes.details}>
+     {media900Up && <div className={classes.details}>
         <span className={classes.permission}>Admin</span>
         <span className={classes.name}>Joseph Adeeyo <BiChevronDown size={20} /></span>
-      </div>
+      </div>}
     </div>
   );
 };

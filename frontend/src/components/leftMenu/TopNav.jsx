@@ -1,9 +1,9 @@
 // NODE_MODULES
-import { GiHamburgerMenu } from "react-icons/gi";
+import { GileftArrow } from "react-icons/gi";
 import { ImStatsBars } from "react-icons/im";
 import { makeStyles } from "@mui/styles";
 import { IconButton } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { FaArrowLeft } from "react-icons/fa";
 
 const useStyles = makeStyles({
   brand: {
@@ -17,10 +17,11 @@ const useStyles = makeStyles({
     bottom: 10,
     left: 7,
   },
-  hamburgerMenu: {
+  leftArrow: {
     position: "relative",
     bottom: 3,
     right: 0,
+    color: "var(--primaryColor)",
   },
   leftMenuNav: {
     position: "fixed",
@@ -42,14 +43,22 @@ const useStyles = makeStyles({
   },
 });
 
-const TopNav = ({ leftMenuWidth, iconOnly, setIconOnly, setLeftMenuWidth }) => {
+const TopNav = ({
+  mediaQueries,
+  leftMenuWidth,
+  iconOnly,
+  setIconOnly,
+  setLeftMenuWidth,
+  setShowLeftMenu,
+}) => {
+  const { tabletDown } = mediaQueries;
   const classes = useStyles();
 
   const inlineStyles = {
     brandName: {
       display: iconOnly && "none",
     },
-    hamburgerMenu: {
+    leftArrow: {
       display: iconOnly && "none",
     },
     leftMenuNav: {
@@ -59,24 +68,28 @@ const TopNav = ({ leftMenuWidth, iconOnly, setIconOnly, setLeftMenuWidth }) => {
   };
 
   const showIconOnly = () => {
-    setIconOnly(!iconOnly);
-    setLeftMenuWidth(50)
+    if (tabletDown) {
+      setShowLeftMenu(false);
+    } else {
+      setIconOnly(!iconOnly);
+      setLeftMenuWidth(50);
+    }
   };
 
   return (
     <nav className={classes.leftMenuNav} style={inlineStyles.leftMenuNav}>
-      <Link className={classes.brand} to="/">
+      <div className={classes.brand}>
         <ImStatsBars className={classes.logo} />
         <span className={classes.brandName} style={inlineStyles.brandName}>
           Admin
         </span>
-      </Link>
+      </div>
       <IconButton
-        className={classes.hamburgerMenu}
-        style={inlineStyles.hamburgerMenu}
+        className={classes.leftArrow}
+        style={inlineStyles.leftArrow}
         onClick={showIconOnly}
       >
-        <GiHamburgerMenu />
+        <FaArrowLeft />
       </IconButton>
     </nav>
   );

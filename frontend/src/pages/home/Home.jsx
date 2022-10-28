@@ -10,7 +10,7 @@ const Home = () => {
   const { mediaQueries } = useContext(AppContext)
   
   return (
-    <Layout mediaQueries={mediaQueries} content={<Dashboard />}/>
+    <Layout mediaQueries={mediaQueries} content={<Dashboard mediaQueries={mediaQueries} />}/>
   )
 }
 
