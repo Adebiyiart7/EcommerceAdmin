@@ -1,4 +1,6 @@
 // NODE_MODULES
+import { useState } from "react";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { VscDashboard } from "react-icons/vsc";
 import { MdOutlineAnalytics, MdOutlinePeopleAlt } from "react-icons/md";
@@ -11,28 +13,10 @@ import { TfiEmail } from "react-icons/tfi";
 // LOCAL IMPORTS
 import TopNav from "./TopNav";
 import MenuItem from "../common/MenuItem";
-import { Link } from "react-router-dom";
-import { useState } from "react";
+import customScrollBar from "../../utilities/customScrollBar";
 
 const useStyles = makeStyles({
-  leftMenu: {
-    "&::-webkit-scrollbar": {
-      width: "0",
-    },
-    "&:hover": {
-      "&::-webkit-scrollbar": {
-        width: "0.4em",
-      },
-      "&::-webkit-scrollbar-track": {
-        boxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-        webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
-      },
-      "&::-webkit-scrollbar-thumb": {
-        backgroundColor: "#888",
-        // outline: '1px solid black'
-      },
-    },
-  },
+  leftMenu: customScrollBar(),
   menuItems: {
     marginTop: 70,
   },
@@ -49,7 +33,7 @@ const LeftMenu = () => {
   const showDetailedLeftMenu = () => {
     setIconOnly(false);
     setLeftMenuWidth(260);
-  }
+  };
 
   const inlineStyles = {
     leftMenu: {
