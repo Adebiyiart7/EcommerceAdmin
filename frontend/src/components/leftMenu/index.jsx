@@ -1,5 +1,4 @@
 // NODE_MODULES
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { VscDashboard } from "react-icons/vsc";
@@ -33,21 +32,16 @@ const useStyles = makeStyles({
 });
 
 const LeftMenu = ({
+  iconOnly,
+  setIconOnly,
   leftMenuWidth,
   setLeftMenuWidth,
   showLeftMenu,
   setShowLeftMenu,
   mediaQueries,
 }) => {
-  const { tabletDown } = mediaQueries;
-  const [iconOnly, setIconOnly] = useState(false);
   const classes = useStyles();
 
-  const showDetailedLeftMenu = () => {
-    setIconOnly(false);
-    setLeftMenuWidth(260);
-  };
-  
   const inlineStyles = {
     leftMenu: {
       position: "relative",
@@ -58,11 +52,7 @@ const LeftMenu = ({
   };
 
   return (
-    <div
-      className={classes.leftMenu}
-      style={inlineStyles.leftMenu}
-      onMouseOver={showDetailedLeftMenu}
-    >
+    <div className={classes.leftMenu} style={inlineStyles.leftMenu}>
       <TopNav
         setShowLeftMenu={setShowLeftMenu}
         setLeftMenuWidth={setLeftMenuWidth}

@@ -3,10 +3,11 @@ import { makeStyles } from "@mui/styles";
 import { BiNotification } from "react-icons/bi";
 import { TbMessages } from "react-icons/tb";
 import { IconButton, TextField } from "@mui/material";
-// LOCAL IMPORTS
-import User from "./User";
 import { IoSearch } from "react-icons/io5";
 import { GiHamburgerMenu } from "react-icons/gi";
+
+// LOCAL IMPORTS
+import User from "./User";
 
 const useStyles = makeStyles({
   icon: {
@@ -42,33 +43,38 @@ const Navbar = ({
   showLeftMenu,
   setShowLeftMenu,
 }) => {
-  const { largeUp, tabletDown, media900Up } = mediaQueries;
+  const { largeUp, media900Up } = mediaQueries;
   const classes = useStyles();
 
   const handleShowLeftMenu = () => {
     if (showLeftMenu) {
       setLeftMenuWidth(260);
     }
-    
     setShowLeftMenu(!showLeftMenu);
   };
 
   return (
     <nav className={classes.topNavbar}>
       <div className={classes.search}>
-        <IconButton>
+        {/* {tabletDown && ( */}
+        <IconButton onClick={handleShowLeftMenu} className={classes.icon}>
+          <GiHamburgerMenu color="var(--primaryColor)" size={24} />
+        </IconButton>
+        {/* )} */}
+        <IconButton className={classes.icon}>
           <IoSearch
-            className={classes.searchIcon}
             color="var(--primaryColor)"
           />
         </IconButton>
-        {largeUp && <TextField
-          className={classes.input}
-          placeholder="Search anything..."
-          type="search"
-          size="small"
-          fullWidth
-        />}
+        {largeUp && (
+          <TextField
+            className={classes.input}
+            placeholder="Search anything..."
+            type="search"
+            size="small"
+            fullWidth
+          />
+        )}
       </div>
       <div className={classes.rightItems}>
         <IconButton className={classes.icon}>
@@ -77,11 +83,6 @@ const Navbar = ({
         <IconButton className={classes.icon}>
           <TbMessages color="var(--primaryColor)" size={24} />
         </IconButton>
-        {tabletDown && (
-          <IconButton onClick={handleShowLeftMenu} className={classes.icon}>
-            <GiHamburgerMenu color="var(--primaryColor)" size={24} />
-          </IconButton>
-        )}
         <User media900Up={media900Up} />
       </div>
     </nav>

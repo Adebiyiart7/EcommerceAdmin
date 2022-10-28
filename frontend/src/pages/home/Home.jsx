@@ -1,17 +1,20 @@
 // NODE_MODULE
-import { useContext } from 'react'
+import { useContext } from "react";
 
 //LOCAL IMPORTS
-import { AppContext } from '../../App'
-import Dashboard from '../../components/dashboard'
-import Layout from '../../components/layout/Layout'
+import { AppContext } from "../../App";
+import Dashboard from "../../components/dashboard";
+import Layout from "../../components/layout/Layout";
 
 const Home = () => {
-  const { mediaQueries } = useContext(AppContext)
-  
-  return (
-    <Layout mediaQueries={mediaQueries} content={<Dashboard mediaQueries={mediaQueries} />}/>
-  )
-}
+  const { mediaQueries } = useContext(AppContext);
 
-export default Home
+  return (
+    <Layout
+      mediaQueries={mediaQueries}
+      content={<Dashboard mediaQueries={mediaQueries} />}
+    />
+  );
+};
+
+export default Home;

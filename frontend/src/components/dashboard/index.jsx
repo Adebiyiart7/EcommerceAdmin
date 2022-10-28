@@ -3,7 +3,6 @@ import { makeStyles } from "@mui/styles";
 import ContentContainer from "../ContentContainer";
 
 // LOCAL IMPORTS
-import Navbar from "../navbar/Navbar";
 import Footer from "../Footer";
 import PageTitle from "../common/PageTitle";
 import AnalyticsCard from "../common/AnalyticsCard";

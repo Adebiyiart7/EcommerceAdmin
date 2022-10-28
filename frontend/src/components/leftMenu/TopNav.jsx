@@ -1,9 +1,10 @@
 // NODE_MODULES
-import { GileftArrow } from "react-icons/gi";
 import { ImStatsBars } from "react-icons/im";
 import { makeStyles } from "@mui/styles";
-import { IconButton } from "@material-ui/core";
 import { FaArrowLeft } from "react-icons/fa";
+import { IconButton } from "@mui/material";
+// import { IconButton } from "@material-ui/core";
+// import { FaArrowLeft } from "react-icons/fa";
 
 const useStyles = makeStyles({
   brand: {
@@ -21,7 +22,6 @@ const useStyles = makeStyles({
     position: "relative",
     bottom: 3,
     right: 0,
-    color: "var(--primaryColor)",
   },
   leftMenuNav: {
     position: "fixed",
@@ -47,11 +47,11 @@ const TopNav = ({
   mediaQueries,
   leftMenuWidth,
   iconOnly,
-  setIconOnly,
-  setLeftMenuWidth,
+  // setIconOnly,
+  // setLeftMenuWidth,
   setShowLeftMenu,
 }) => {
-  const { tabletDown } = mediaQueries;
+  const {tabletDown} = mediaQueries
   const classes = useStyles();
 
   const inlineStyles = {
@@ -67,14 +67,16 @@ const TopNav = ({
     },
   };
 
-  const showIconOnly = () => {
-    if (tabletDown) {
-      setShowLeftMenu(false);
-    } else {
-      setIconOnly(!iconOnly);
-      setLeftMenuWidth(50);
-    }
-  };
+  // const showIconOnly = () => {
+  //   if (tabletDown) {
+  //     setShowLeftMenu(false);
+  //   } else {
+  //     setIconOnly(!iconOnly);
+  //     setLeftMenuWidth(50);
+  //   }
+  // };
+
+  const showLeftMenu = () => setShowLeftMenu(false);
 
   return (
     <nav className={classes.leftMenuNav} style={inlineStyles.leftMenuNav}>
@@ -84,13 +86,13 @@ const TopNav = ({
           Admin
         </span>
       </div>
-      <IconButton
+      {tabletDown && <IconButton
         className={classes.leftArrow}
         style={inlineStyles.leftArrow}
-        onClick={showIconOnly}
+        onClick={showLeftMenu}
       >
-        <FaArrowLeft />
-      </IconButton>
+        <FaArrowLeft color="var(--primaryColor)"/>
+      </IconButton>}
     </nav>
   );
 };

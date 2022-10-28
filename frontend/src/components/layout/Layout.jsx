@@ -17,6 +17,7 @@ const useStyles = makeStyles({
 
 const Layout = ({ mediaQueries, content }) => {
   const { tabletDown } = mediaQueries;
+  const [iconOnly, setIconOnly] = useState(false);
   const [leftMenuWidth, setLeftMenuWidth] = useState(260);
   const [showLeftMenu, setShowLeftMenu] = useState(true);
   const classes = useStyles();
@@ -25,12 +26,14 @@ const Layout = ({ mediaQueries, content }) => {
     if (tabletDown) {
       setShowLeftMenu(false);
     }
-  }, [tabletDown])
-  
+  }, [tabletDown]);
+
   return (
     <div className={classes.layout}>
       {showLeftMenu && (
         <LeftMenu
+          iconOnly={iconOnly}
+          setIconOnly={setIconOnly}
           leftMenuWidth={leftMenuWidth}
           setLeftMenuWidth={setLeftMenuWidth}
           showLeftMenu={showLeftMenu}
@@ -40,6 +43,8 @@ const Layout = ({ mediaQueries, content }) => {
       )}
       <main className={classes.mainContent}>
         <Navbar
+          iconOnly={iconOnly}
+          setIconOnly={setIconOnly}
           setLeftMenuWidth={setLeftMenuWidth}
           showLeftMenu={showLeftMenu}
           setShowLeftMenu={setShowLeftMenu}
