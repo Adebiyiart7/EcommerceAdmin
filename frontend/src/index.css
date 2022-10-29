@@ -4,11 +4,11 @@
   --boxShadowColor: rgb(54 74 99 / 5%);
   --iconColor: rgba(0, 0, 0, 0.54);
   --lightBackground: rgb(245, 246, 250);
-  --lightText: rgba(0, 0, 0, 0.644);
+  --lightText: #8d8d8d;
   --primaryBorder: #e5e9f2;
   --primaryBoxShadow: 0 0 5px 0 var(--boxShadowColor);
-  --primaryColor: #008000; /* #4f4f76; */
-  --primaryText: #333;
+  --primaryColor: #6d4c41; /* #4f4f76; */
+  --primaryText: #6d4c41;
   --secondaryColor: #ff3e1d;
   --white: #fff;
 
@@ -21,9 +21,4 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
 }

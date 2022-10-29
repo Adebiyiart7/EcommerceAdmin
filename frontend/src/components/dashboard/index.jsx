@@ -12,6 +12,7 @@ import { MdGroups } from "react-icons/md";
 import { BsCreditCard } from "react-icons/bs";
 import { FaRegMoneyBillAlt } from "react-icons/fa";
 import SalesStats from "../common/SalesStats";
+import RecentOrder from "../common/RecentOrder";
 
 const useStyles = makeStyles({
   dashboard: {
@@ -67,6 +68,7 @@ const Dashboard = ({ mediaQueries }) => {
             </Grid>
           </Grid>
           <SalesStats mediaQueries={mediaQueries} />
+          {/* <RecentOrder mediaQueries={mediaQueries} /> */}
         </ContentContainer>
         <Footer />
       </div>

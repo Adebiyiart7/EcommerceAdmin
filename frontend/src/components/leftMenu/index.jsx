@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { VscDashboard } from "react-icons/vsc";
-import { MdOutlineAnalytics, MdOutlinePeopleAlt } from "react-icons/md";
+import {  MdOutlinePeopleAlt } from "react-icons/md";
 import { TbFileInvoice, TbMessages } from "react-icons/tb";
 import { IoAnalytics } from "react-icons/io5";
 import { FaRegListAlt } from "react-icons/fa";
@@ -68,13 +68,13 @@ const LeftMenu = ({
             title={"Dashboard"}
           />
         </Link>
-        <Link className={classes.menuLink} to="/">
+        {/* <Link className={classes.menuLink} to="/">
           <MenuItem
             leftIcon={<MdOutlineAnalytics />}
             iconOnly={iconOnly}
             title={"Analytics"}
           />
-        </Link>
+        </Link> */}
         <Link className={classes.menuLink} to="/">
           <MenuItem
             leftIcon={<BsCreditCard />}

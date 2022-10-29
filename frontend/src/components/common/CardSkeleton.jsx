@@ -20,11 +20,18 @@ const useStyles = makeStyles({
   },
 });
 
-const CardSkeleton = ({ children, title, subTitle }) => {
+const CardSkeleton = ({ mediaQueries, children, title, subTitle }) => {
+  const { tabletDown } = mediaQueries;
   const classes = useStyles();
 
+  const inlineStyles = {
+    analyticsCard: {
+       marginTop: tabletDown ? 16 : 24,
+    }
+  }
+
   return (
-    <div className={classes.analyticsCard}>
+    <div className={classes.analyticsCard} style={inlineStyles.analyticsCard}>
       <div>
         <h3 className={classes.title}>{title}</h3>
         <p className={classes.subTitle}>{subTitle}</p>
