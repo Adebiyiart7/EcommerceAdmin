@@ -1,4 +1,7 @@
 // NODE_MODULES
+import { MdGroups, MdOutlinePeopleAlt } from "react-icons/md";
+import { BsCreditCard } from "react-icons/bs";
+import { FaRegMoneyBillAlt } from "react-icons/fa";
 import { makeStyles } from "@mui/styles";
 import ContentContainer from "../ContentContainer";
 import { orange, blue, lightGreen } from "@mui/material/colors";
@@ -7,12 +10,11 @@ import { orange, blue, lightGreen } from "@mui/material/colors";
 import Footer from "../Footer";
 import PageTitle from "../common/PageTitle";
 import AnalyticsCard from "../common/AnalyticsCard";
-import { Grid } from "@mui/material";
-import { MdGroups } from "react-icons/md";
-import { BsCreditCard } from "react-icons/bs";
-import { FaRegMoneyBillAlt } from "react-icons/fa";
 import SalesStats from "../common/SalesStats";
 import RecentOrder from "../common/RecentOrder";
+import NewUsers from "../common/NewUsers";
+import WeeklySales from "../common/weeklySales";
+import { IoAnalytics } from "react-icons/io5";
 
 const useStyles = makeStyles({
   dashboard: {
@@ -21,9 +23,14 @@ const useStyles = makeStyles({
 });
 
 const Dashboard = ({ mediaQueries }) => {
+  const { tabletUp } = mediaQueries;
   const classes = useStyles();
 
   const inlineStyles = {
+    basicAnalytics: {
+      display: "flex",
+      flexDirection: tabletUp ? "row" : "column",
+    },
     scrollView: {
       overflowY: "scroll",
       height: "calc(100vh - 73px)",
@@ -34,41 +41,29 @@ const Dashboard = ({ mediaQueries }) => {
     <div className={classes.dashboard}>
       <div style={inlineStyles.scrollView}>
         <ContentContainer mediaQueries={mediaQueries}>
-          <Grid spacing={{ xs: 2, md: 3 }}>
-            <PageTitle title="Dashboard" />
-          </Grid>
-          <Grid container spacing={{ xs: 2, md: 3 }}>
-            <Grid item xs={12} sm={6}>
+          <PageTitle title="Dashboard" />
+          <div style={inlineStyles.basicAnalytics}>
+            <div style={{ flex: 5 }}>
               <AnalyticsCard
-                analytics={analytics.today}
-                title={"Today"}
-                subTitle={"Profit $15.76k"}
+                mediaQueries={mediaQueries}
+                analytics={analytics.orders}
+                title={"Sales"}
+                subTitle={"Last 24hrs"}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
               <AnalyticsCard
-                analytics={analytics.yesterday}
-                title={"Yesterday"}
-                subTitle={"Profit $15.76k"}
+                mediaQueries={mediaQueries}
+                analytics={analytics.users}
+                title={"Users"}
+                subTitle={"Last 7 days"}
               />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <AnalyticsCard
-                analytics={analytics.week}
-                title={"Weekly"}
-                subTitle={"Profit $15.76k"}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <AnalyticsCard
-                analytics={analytics.allTimes}
-                title={"All Times"}
-                subTitle={"Profit $15.76k"}
-              />
-            </Grid>
-          </Grid>
+            </div>
+            <div style={{ flex: 5, marginLeft: tabletUp && 24 }}>
+              <WeeklySales mediaQueries={mediaQueries} />
+            </div>
+          </div>
           <SalesStats mediaQueries={mediaQueries} />
-          {/* <RecentOrder mediaQueries={mediaQueries} /> */}
+          <RecentOrder mediaQueries={mediaQueries} />
+          <NewUsers mediaQueries={mediaQueries} />
         </ContentContainer>
         <Footer />
       </div>
@@ -77,7 +72,7 @@ const Dashboard = ({ mediaQueries }) => {
 };
 
 const analytics = {
-  today: [
+  orders: [
     {
       name: "Orders",
       value: "3,782",
@@ -93,73 +88,27 @@ const analytics = {
       icon: <FaRegMoneyBillAlt />,
     },
     {
-      name: "Visitors",
-      value: "8,636",
+      name: "Profit",
+      value: "$15k",
       change: "+29",
       color: lightGreen,
-      icon: <MdGroups />,
+      icon: <IoAnalytics />,
     },
   ],
-  yesterday: [
+  users: [
     {
-      name: "Orders",
+      name: "Total Users",
       value: "3,782",
       change: "+29",
       color: blue,
-      icon: <BsCreditCard />,
+      icon: <MdOutlinePeopleAlt />,
     },
     {
-      name: "Revenue",
+      name: "New",
       value: "$60k",
       change: "+29",
       color: orange,
-      icon: <FaRegMoneyBillAlt />,
-    },
-    {
-      name: "Visitors",
-      value: "8,636",
-      change: "+29",
-      color: lightGreen,
-      icon: <MdGroups />,
-    },
-  ],
-  week: [
-    {
-      name: "Orders",
-      value: "3,782",
-      change: "+29",
-      color: blue,
-      icon: <BsCreditCard />,
-    },
-    {
-      name: "Revenue",
-      value: "$60k",
-      change: "+29",
-      color: orange,
-      icon: <FaRegMoneyBillAlt />,
-    },
-    {
-      name: "Visitors",
-      value: "8,636",
-      change: "+29",
-      color: lightGreen,
-      icon: <MdGroups />,
-    },
-  ],
-  allTimes: [
-    {
-      name: "Orders",
-      value: "3,782",
-      change: "+29",
-      color: blue,
-      icon: <BsCreditCard />,
-    },
-    {
-      name: "Revenue",
-      value: "$60k",
-      change: "+29",
-      color: orange,
-      icon: <FaRegMoneyBillAlt />,
+      icon: <MdOutlinePeopleAlt />,
     },
     {
       name: "Visitors",

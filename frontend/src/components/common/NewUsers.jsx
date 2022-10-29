@@ -23,9 +23,9 @@ const rows = [
   createData('Gingerbread', 356, 16.0, 49, 3.9),
 ];
 
-const RecentOrder = ({mediaQueries}) => {
+const NewUsers = ({mediaQueries}) => {
   return (
-    <CardSkeleton mediaQueries={mediaQueries} title={"Recent Order"} subTitle={"Last 7 Days"}>
+    <CardSkeleton mediaQueries={mediaQueries} title={"New Users"} subTitle={"This Week"}>
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
@@ -59,4 +59,4 @@ const RecentOrder = ({mediaQueries}) => {
   )
 }
 
-export default RecentOrder
+export default NewUsers

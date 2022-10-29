@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   },
   value: {
     color: "var(--primaryText)",
-    fontSize: 22,
+    fontSize: 20,
     fontWeight: 600,
   },
 });

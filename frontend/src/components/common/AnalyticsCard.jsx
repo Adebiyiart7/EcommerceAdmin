@@ -1,26 +1,13 @@
 // NODE_MODULES
 import { Grid } from "@mui/material";
-import { makeStyles } from "@mui/styles";
 import CardSkeleton from "./CardSkeleton";
 
 // LOCAL IMPORTS
 import SmallBox from "./SmallBox";
 
-const useStyles = makeStyles({
-  analyticsCard: {
-    backgroundColor: "var(--white)",
-    padding: 20,
-    borderRadius: 7,
-    border: "1px solid var(--primaryBorder)",
-    boxShadow: "var(--primaryBoxShadow)",
-  },
-});
-
-const AnalyticsCard = ({ title, subTitle, analytics }) => {
-  const classes = useStyles();
-
+const AnalyticsCard = ({mediaQueries, title, subTitle, analytics }) => {
   return (
-    <CardSkeleton title={title} subTitle={subTitle}>
+    <CardSkeleton mediaQueries={mediaQueries} title={title} subTitle={subTitle}>
       <Grid
         sx={{ display: "flex", justifyContent: "space-between" }}
         rowSpacing={3}

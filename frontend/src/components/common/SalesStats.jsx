@@ -76,28 +76,28 @@ const SalesStats = ({ mediaQueries }) => {
   };
 
   return (
-      <CardSkeleton mediaQueries={mediaQueries} title={"Sales Stats"}>
-        <Line
-          data={data}
-          options={{
-            responsive: true,
-            plugins: {
-              legend: {
-                display: true,
-              },
-              title: {
-                display: true,
-                font: {
-                  size: 20,
-                  weight: 600,
-                  family: "'Inter', serif",
-                },
-                text: "Monthly Sales Statistics",
-              },
+    <CardSkeleton mediaQueries={mediaQueries} title={"Sales Stats"}>
+      <Line
+        data={data}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: {
+              display: true,
             },
-          }}
-        />
-      </CardSkeleton>
+            title: {
+              display: true,
+              font: {
+                size: 20,
+                weight: 600,
+                family: "'Inter', serif",
+              },
+              text: "Monthly Sales Statistics",
+            },
+          },
+        }}
+      />
+    </CardSkeleton>
   );
 };
 

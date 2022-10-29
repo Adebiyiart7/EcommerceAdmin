@@ -4,7 +4,7 @@ const PageTitle = ({ title }) => {
       fontSize: 30,
       color: "var(--primaryText)",
       fontweight: 800,
-      margin: "0 0 20px 0"
+      margin: 0
     }
   }
   return (

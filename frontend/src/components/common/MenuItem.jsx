@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     padding: "2px 12px 10px 12px",
     fontWeight: 500,
     fontSize: 16,
-    color: "var(--primaryColor)",
+    color: "var(--primaryText)",
     backgroundColor: "var(--lightBackground)",
     "&:hover": {
       color: "var(--white) !important",

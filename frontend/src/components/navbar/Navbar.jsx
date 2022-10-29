@@ -57,12 +57,12 @@ const Navbar = ({
       <div className={classes.search}>
         {/* {tabletDown && ( */}
         <IconButton onClick={handleShowLeftMenu} className={classes.icon}>
-          <GiHamburgerMenu color="var(--primaryColor)" size={24} />
+          <GiHamburgerMenu color="var(--primaryText)" size={24} />
         </IconButton>
         {/* )} */}
         <IconButton className={classes.icon}>
           <IoSearch
-            color="var(--primaryColor)"
+            color="var(--primaryText)"
           />
         </IconButton>
         {largeUp && (
@@ -77,10 +77,10 @@ const Navbar = ({
       </div>
       <div className={classes.rightItems}>
         <IconButton className={classes.icon}>
-          <BiNotification color="var(--primaryColor)" size={24} />
+          <BiNotification color="var(--primaryText)" size={24} />
         </IconButton>
         <IconButton className={classes.icon}>
-          <TbMessages color="var(--primaryColor)" size={24} />
+          <TbMessages color="var(--primaryText)" size={24} />
         </IconButton>
         <User media900Up={media900Up} />
       </div>

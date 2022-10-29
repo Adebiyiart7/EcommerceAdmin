@@ -91,7 +91,7 @@ const TopNav = ({
         style={inlineStyles.leftArrow}
         onClick={showLeftMenu}
       >
-        <FaArrowLeft color="var(--primaryColor)"/>
+        <FaArrowLeft color="var(--primaryText)"/>
       </IconButton>}
     </nav>
   );

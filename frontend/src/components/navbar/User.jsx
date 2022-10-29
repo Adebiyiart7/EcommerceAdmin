@@ -13,7 +13,7 @@ const useStyles = makeStyles({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    color: "var(--primaryColor)",
+    color: "var(--primaryText)",
     fontWeight: 600,
     whiteSpace: "nowrap",
   },
