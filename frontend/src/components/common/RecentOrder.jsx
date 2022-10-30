@@ -2,7 +2,8 @@
 import * as React from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
+import { styled } from '@mui/material/styles';
+import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
@@ -10,47 +11,73 @@ import Paper from '@mui/material/Paper';
 
 // LOCAL IMPORTS
 import CardSkeleton from "./CardSkeleton"
+import { brown } from '@mui/material/colors';
 
-const createData = (name, calories, fat, carbs, protein) =>  {
-  return { name, calories, fat, carbs, protein };
+const StyledTableCell = styled(TableCell)(({ theme }) => ({
+  [`&.${tableCellClasses.head}`]: {
+    backgroundColor: brown[400],
+    color: theme.palette.common.white,
+    fontFamily: "'Inter', serif",
+    fontWeight: 700
+  },
+  [`&.${tableCellClasses.body}`]: {
+    fontSize: 14,
+    fontWeight: 500,
+    color: "var(--primaryText)",
+    fontFamily: "'Inter', serif",
+  },
+}));
+
+const StyledTableRow = styled(TableRow)(({ theme }) => ({
+  '&:nth-of-type(odd)': {
+    backgroundColor: "var(--lightBackground)",
+  },
+  // hide last border
+  '&:last-child td, &:last-child th': {
+    border: 0,
+  },
+}));
+
+const createData = (name, user, amount, status, date) =>  {
+  return { name, user, amount, status, date };
 }
 
 const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+  createData('#12345', "Adeeyo Joseph Adebiyi", 29, "PAID", "08/02/2022"),
+  createData('#12346', "John Smith", 43, "CANCELED", "15/04/2022"),
+  createData('#12347', "Emmanuel Tony", 15, "PAID", "18/04/2022"),
+  createData('#12348', "Michael James", 31, "CANCELED", "16/06/2022"),
+  createData('#12349', "Taylor Swift", 50, "PAID", "25/09/2022"),
 ];
 
 const RecentOrder = ({mediaQueries}) => {
   return (
-    <CardSkeleton mediaQueries={mediaQueries} title={"Recent Order"} subTitle={"Last 7 Days"}>
+    <CardSkeleton mediaQueries={mediaQueries} title={"Recent Order"} subTitle={"Last 10 Orders"}>
     <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <Table sx={{ minWidth: 650 }} aria-label="recent order table">
         <TableHead>
           <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
+            <StyledTableCell>Order No</StyledTableCell>
+            <StyledTableCell>Full Name</StyledTableCell>
+            <StyledTableCell>Amount&nbsp;(USD)</StyledTableCell>
+            <StyledTableCell>Status</StyledTableCell>
+            <StyledTableCell>Date</StyledTableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {rows.map((row) => (
-            <TableRow
+            <StyledTableRow
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" scope="row">
+              <StyledTableCell component="th" scope="row">
                 {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
+              </StyledTableCell>
+              <StyledTableCell>{row.user}</StyledTableCell>
+              <StyledTableCell>{row.amount}</StyledTableCell>
+              <StyledTableCell>{row.status}</StyledTableCell>
+              <StyledTableCell>{row.date}</StyledTableCell>
+            </StyledTableRow>
           ))}
         </TableBody>
       </Table>
