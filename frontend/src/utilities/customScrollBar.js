@@ -12,7 +12,7 @@ const customScrollBar = () => {
         webkitBoxShadow: "inset 0 0 6px rgba(0,0,0,0.00)",
       },
       "&::-webkit-scrollbar-thumb": {
-        backgroundColor: "#888",
+        backgroundColor: "var(--lightText)",
         // outline: '1px solid black'
       },
     },

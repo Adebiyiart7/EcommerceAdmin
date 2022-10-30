@@ -29,6 +29,7 @@ const Dashboard = ({ mediaQueries }) => {
   const inlineStyles = {
     basicAnalytics: {
       display: "flex",
+      flex: 1,
       flexDirection: tabletUp ? "row" : "column",
     },
     scrollView: {
@@ -43,7 +44,7 @@ const Dashboard = ({ mediaQueries }) => {
         <ContentContainer mediaQueries={mediaQueries}>
           <PageTitle title="Dashboard" />
           <div style={inlineStyles.basicAnalytics}>
-            <div style={{ flex: 5 }}>
+            <div style={{ flex: .5 }}>
               <AnalyticsCard
                 mediaQueries={mediaQueries}
                 analytics={analytics.orders}
@@ -57,7 +58,7 @@ const Dashboard = ({ mediaQueries }) => {
                 subTitle={"Last 7 days"}
               />
             </div>
-            <div style={{ flex: 5, marginLeft: tabletUp && 24 }}>
+            <div style={{ flex: .5, marginLeft: tabletUp && 24 }}>
               <WeeklySales mediaQueries={mediaQueries} />
             </div>
           </div>

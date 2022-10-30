@@ -6,7 +6,7 @@ const useStyles = makeStyles({
   details: {
     display: "flex",
     flexDirection: "column",
-    marginLeft: 16,
+    marginLeft: 10,
   },
   name: {
     color: "var(--lightText)",

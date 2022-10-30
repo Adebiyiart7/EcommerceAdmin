@@ -2,12 +2,14 @@
 import { Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import { VscDashboard } from "react-icons/vsc";
-import {  MdOutlinePeopleAlt } from "react-icons/md";
-import { TbFileInvoice, TbMessages } from "react-icons/tb";
+import { MdOutlinePeopleAlt } from "react-icons/md";
+// import { TbFileInvoice, TbMessages } from "react-icons/tb";
 import { IoAnalytics } from "react-icons/io5";
 import { FaRegListAlt } from "react-icons/fa";
 import { BsCreditCard } from "react-icons/bs";
 import { TfiEmail } from "react-icons/tfi";
+import { BiSupport } from "react-icons/bi";
+import { FiSettings } from "react-icons/fi";
 
 // LOCAL IMPORTS
 import TopNav from "./TopNav";
@@ -110,7 +112,7 @@ const LeftMenu = ({
             title={"Email"}
           />
         </Link>
-        <Link className={classes.menuLink} to="/">
+        {/* <Link className={classes.menuLink} to="/">
           <MenuItem
             leftIcon={<TbMessages />}
             iconOnly={iconOnly}
@@ -122,6 +124,20 @@ const LeftMenu = ({
             leftIcon={<TbFileInvoice />}
             iconOnly={iconOnly}
             title={"Invoice"}
+          />
+        </Link> */}
+        <Link className={classes.menuLink} to="/">
+          <MenuItem
+            leftIcon={<FiSettings />}
+            iconOnly={iconOnly}
+            title={"Settings"}
+          />
+        </Link>
+        <Link className={classes.menuLink} to="/">
+          <MenuItem
+            leftIcon={<BiSupport />}
+            iconOnly={iconOnly}
+            title={"Support"}
           />
         </Link>
       </div>
