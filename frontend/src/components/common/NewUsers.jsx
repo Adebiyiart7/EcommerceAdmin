@@ -1,62 +1,74 @@
 // NODE_MODULES
-import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-
 // LOCAL IMPORTS
-import CardSkeleton from "./CardSkeleton"
+import CardSkeleton from "./CardSkeleton";
+import AppTable from "./Table";
 
-const createData = (name, calories, fat, carbs, protein) =>  {
-  return { name, calories, fat, carbs, protein };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
+const fields = [
+  { name: "id", alias: "ID" },
+  { name: "user", alias: "Full Name" },
+  { name: "email", alias: "Email" },
+  { name: "role", alias: "Role" },
+  { name: "status", alias: "Status" },
+  { name: "createdAt", alias: "CreatedAt" },
 ];
 
-const NewUsers = ({mediaQueries}) => {
-  return (
-    <CardSkeleton mediaQueries={mediaQueries} title={"New Users"} subTitle={"This Week"}>
-    <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Dessert (100g serving)</TableCell>
-            <TableCell align="right">Calories</TableCell>
-            <TableCell align="right">Fat&nbsp;(g)</TableCell>
-            <TableCell align="right">Carbs&nbsp;(g)</TableCell>
-            <TableCell align="right">Protein&nbsp;(g)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.calories}</TableCell>
-              <TableCell align="right">{row.fat}</TableCell>
-              <TableCell align="right">{row.carbs}</TableCell>
-              <TableCell align="right">{row.protein}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
-    </CardSkeleton>
-  )
-}
+const createData = (id, user, email, role, status, createdAt) => {
+  return { id, user, email, role, status, createdAt };
+};
 
-export default NewUsers
+const NewUsers = ({ mediaQueries }) => {
+  return (
+    <CardSkeleton
+      mediaQueries={mediaQueries}
+      title={"New Users"}
+      subTitle={"Last 10 New Users"}
+    >
+      <AppTable rows={rows} fields={fields} />
+    </CardSkeleton>
+  );
+};
+
+export default NewUsers;
+
+const rows = [
+  createData(
+    "#12345",
+    "Adeeyo Joseph Adebiyi",
+    "adebiyiartworld@gmail.com",
+    "Super Admin",
+    "Active",
+    "08/02/2022"
+  ),
+  createData(
+    "#12346",
+    "John Smith",
+    "smith@gmail.com",
+    "Admin",
+    "Inactive",
+    "15/04/2022"
+  ),
+  createData(
+    "#12347",
+    "Emmanuel Tony",
+    "tony@gmail.com",
+    "User",
+    "Blocked",
+    "18/04/2022"
+  ),
+  createData(
+    "#12348",
+    "Michael James",
+    "james@gmail.com",
+    "User",
+    "Inactive",
+    "16/06/2022"
+  ),
+  createData(
+    "#12349",
+    "Taylor Swift",
+    "swift@gmail.com",
+    "User",
+    "Active",
+    "25/09/2022"
+  ),
+];
