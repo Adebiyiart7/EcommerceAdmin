@@ -5,6 +5,7 @@ import { useTheme, useMediaQuery } from "@material-ui/core";
 
 // LOCAL IMPORTS
 import Home from "./pages/home/Home";
+import Login from "./pages/auth/Login";
 
 export const AppContext = createContext();
 
@@ -37,6 +38,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </Router>
     </AppContext.Provider>
