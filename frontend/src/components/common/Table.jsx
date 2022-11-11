@@ -46,9 +46,9 @@ const AppTable = ({ rows, fields }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row) => (
+          {rows.map((row, index) => (
             <StyledTableRow
-              key={row.name}
+              key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               {/* <StyledTableCell component="th" scope="row">
