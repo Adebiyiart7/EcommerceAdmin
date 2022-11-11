@@ -22,6 +22,11 @@ const useStyles = makeStyles({
     color: "var(--primaryText)",
     fontFamily: "'Inter', serif",
   },
+  error: {
+    color: "var(--danger)",
+    fontWeight: 500,
+    textAlign: "center"
+  },
   label: {
     fontWeight: 500,
     display: "block",
@@ -42,6 +47,7 @@ const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const classes = useStyles();
+  const [error, setError] = useState("");
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -60,22 +66,23 @@ const Login = () => {
   );
 
   useEffect(() => {
-    if (isError) console.log(message); // TODO show alert
+    if (isError) setError(message);
 
     if (isSuccess) {
       navigate("/");
+      dispatch(reset()); // reset auth state
     }
   }, [isError, isSuccess, message, navigate, dispatch]);
 
   const handleSubmit = () => {
     dispatch(login({ email: email, password: password }));
-    dispatch(reset()); // reset auth state
   };
 
   return (
     <div className={classes.container}>
       <h1 className={classes.header}>Admin</h1>
       <form className={classes.form}>
+      {error && <p className={classes.error}>{error}</p>}
         <label className={classes.label} htmlFor="email">
           Email:
         </label>
