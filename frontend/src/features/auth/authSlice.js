@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import authService from "./authService";
 
-const user = JSON.stringify(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
   user: user ? user : null,
@@ -13,7 +13,17 @@ const initialState = {
 
 export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
   try {
-    return authService.login(data);
+    const user = await authService.login(data);
+
+    if (user) {
+      // check if user is an admin or superAdmin
+      if (user.isAdmin === true || user.isSuperAdmin === true) {
+        localStorage.setItem("user", JSON.stringify(user));
+        return user;
+      } else {
+        return thunkAPI.rejectWithValue("Invalid Permission!");
+      }
+    }
   } catch (error) {
     const message =
       (error.response && error.response.data && error.response.data.message) ||
