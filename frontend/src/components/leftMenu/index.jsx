@@ -98,7 +98,7 @@ const LeftMenu = ({
             title={"Users"}
           />
         </Link>
-        <Link className={classes.menuLink} to="/">
+        <Link className={classes.menuLink} to="/products">
           <MenuItem
             leftIcon={<FaRegListAlt />}
             iconOnly={iconOnly}

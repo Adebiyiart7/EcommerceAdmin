@@ -17,7 +17,7 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
     fontWeight: 700,
   },
   [`&.${tableCellClasses.body}`]: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: 500,
     color: "var(--primaryText)",
     fontFamily: "'Inter', serif",
@@ -51,9 +51,6 @@ const AppTable = ({ rows, fields }) => {
               key={index}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              {/* <StyledTableCell component="th" scope="row">
-                {row.name}
-              </StyledTableCell> */}
               {fields.map((item, index) => (
                 <StyledTableCell key={index}>{row[item.name]}</StyledTableCell>
               ))}

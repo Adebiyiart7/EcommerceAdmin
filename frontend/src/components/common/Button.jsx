@@ -1,13 +1,19 @@
-import React from 'react'
+import { Button } from "@mui/material";
 
-const Button = () => {
+const AppButton = ({ color, className, onClick, startIcon, sx, title }) => {
   return (
-    <div>
-      {leftIcon}
-      {text}
-      {rightIcon}
-    </div>
-  )
-}
+    <Button
+      sx={{fontWeight: 500, ...sx}}
+      color={color}
+      startIcon={startIcon}
+      variant="contained"
+      disableElevation
+      onClick={onClick}
+      className={className}
+    >
+      {title}
+    </Button>
+  );
+};
 
-export default Button
+export default AppButton;

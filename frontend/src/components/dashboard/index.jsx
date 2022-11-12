@@ -32,10 +32,10 @@ const Dashboard = ({ mediaQueries }) => {
       flex: 1,
       flexDirection: tabletUp ? "row" : "column",
     },
-    scrollView: {
-      overflowY: "scroll",
-      height: "calc(100vh - 73px)",
-    },
+    // scrollView: {
+    //   overflowY: "scroll",
+    //   height: "calc(100vh - 73px)",
+    // },
   };
 
   return (

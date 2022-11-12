@@ -12,6 +12,7 @@ import { useTheme, useMediaQuery } from "@material-ui/core";
 import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
 import { useSelector } from "react-redux";
+import Products from "./pages/products";
 
 export const AppContext = createContext();
 
@@ -59,6 +60,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={privateElement(<Home />)} />
+          <Route path="/products" element={privateElement(<Products />)} />
         </Routes>
       </Router>
     </AppContext.Provider>

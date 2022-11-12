@@ -4,6 +4,8 @@ import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   contentContainer: {
+    overflowY: "scroll",
+    height: "calc(100vh - 73px)",
     backgroundColor: "var(--lightBackground)",
   },
 });
@@ -14,7 +16,7 @@ const ContentContainer = ({ children, mediaQueries }) => {
 
   const inlineStyles = {
     container: {
-      padding: largeDown && 0
+      padding: largeDown && 0,
     },
     contentContainer: {
       padding: largeDown ? 16 : 30,
