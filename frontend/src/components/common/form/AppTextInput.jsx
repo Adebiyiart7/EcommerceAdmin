@@ -1,16 +1,12 @@
 // NODE_NMODULES
 import { TextField } from "@mui/material";
 import { useFormikContext } from "formik";
-// import { makeStyles } from "@mui/styles";
-
-// const useStyles = makeStyles({
-
-// });
+import ErrorMessage from "../ErrorMessage";
 
 const AppTextInput = ({ name, label, labelStyles, ...otherProps }) => {
-  // const classes = useStyles();
-  const { values, errors, handleChange } = useFormikContext();
-
+  const { values, errors, handleChange, touched, setFieldTouched } =
+    useFormikContext();
+  console.log(touched);
   return (
     <div>
       <label className={labelStyles} htmlFor={name}>
@@ -22,9 +18,10 @@ const AppTextInput = ({ name, label, labelStyles, ...otherProps }) => {
         size="small"
         value={values[name]}
         onChange={handleChange(name)}
+        onBlur={() => setFieldTouched(name)}
         {...otherProps}
       />
-      <div>{errors[name]}</div>
+      <ErrorMessage message={errors[name]} visible={touched[name]} />
     </div>
   );
 };

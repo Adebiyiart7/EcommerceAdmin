@@ -18,6 +18,7 @@ import { Formik } from "formik";
 // LOCAL IMPORTS
 import AppButton from "../../components/common/Button";
 import AppTextInput from "../../components/common/form/AppTextInput";
+import ErrorMessage from "../../components/common/ErrorMessage";
 
 const useStyles = makeStyles({
   addButton: {
@@ -26,10 +27,11 @@ const useStyles = makeStyles({
   },
   dialogTitle: {
     fontSize: 22,
-    fontWeight: "600 !important",
+    fontWeight: "600",
     color: "var(--primaryText)",
-    paddingBottom: "0px !important",
-    fontFamily: "'Inter', serif !important",
+    paddingBottom: 0,
+    marginBottom: 10,
+    fontFamily: "'Inter', serif",
   },
   label: {
     display: "block",
@@ -41,11 +43,11 @@ const useStyles = makeStyles({
 });
 
 const validationSchema = Yup.object().shape({
-  name: Yup.string().required().label("Name"),
-  price: Yup.string().required().label("Price"),
-  category: Yup.string().required().label("Category"),
-  subCategory: Yup.string().label("Sub Category"),
-  description: Yup.string().required().label("Description"),
+  name: Yup.string().required().min(3).max(50).label("Name"),
+  price: Yup.string().required().min(1).max(7).label("Price"),
+  category: Yup.string().required().min(3).max(50).label("Category"),
+  subCategory: Yup.string().min(3).max(50).label("Sub Category"),
+  description: Yup.string().required().min(3).max(1000).label("Description"),
 });
 
 const AddProductModal = ({
@@ -85,27 +87,27 @@ const AddProductModal = ({
             console.log(JSON.stringify(values));
           }}
         >
-          {({ handleSubmit, values, handleChange }) => (
+          {({ handleSubmit, values, errors, handleChange, touched, setFieldTouched }) => (
             <form onSubmit={handleSubmit}>
+              <Grid item xs={12}>
+                <IconButton>
+                  <label htmlFor="images">
+                    <Input
+                      sx={{ width: 0 }}
+                      // onChange={handleImageUpload}
+                      name="images"
+                      accept="image/png, image/gif, image/jpeg, image/jpg"
+                      id="images"
+                      type="file"
+                      inputProps={{
+                        multiple: true,
+                      }}
+                    />
+                    <FaCamera size={24} />
+                  </label>
+                </IconButton>
+              </Grid>
               <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <IconButton>
-                    <label htmlFor="images">
-                      <Input
-                        sx={{ width: 0 }}
-                        // onChange={handleImageUpload}
-                        name="images"
-                        accept="image/png, image/gif, image/jpeg, image/jpg"
-                        id="images"
-                        type="file"
-                        inputProps={{
-                          multiple: true,
-                        }}
-                      />
-                      <FaCamera size={24} />
-                    </label>
-                  </IconButton>
-                </Grid>
                 <Grid item xs={12} sm={6}>
                   <AppTextInput
                     labelStyles={classes.label}
@@ -133,6 +135,7 @@ const AddProductModal = ({
                       type="text"
                       name="category"
                       value={values.category}
+                      onBlur={() => setFieldTouched("category")}
                       onChange={handleChange("category")}
                     >
                       <MenuItem value="Fruits">Fruits</MenuItem>
@@ -145,18 +148,22 @@ const AddProductModal = ({
                       <MenuItem value="Fishes">Fishes</MenuItem>
                       <MenuItem value="Turkey">Turkey</MenuItem>
                     </Select>
+                    <ErrorMessage
+                      message={errors.category}
+                      visible={touched.category}
+                    />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <FormControl sx={{ width: "100%" }} size="small">
-                    <label className={classes.label} htmlFor="category">
+                    <label className={classes.label} htmlFor="subCategory">
                       Sub Category
                     </label>
                     <Select
-                      required
                       type="text"
                       name="subCategory"
                       value={values.subCategory}
+                      onBlur={() => setFieldTouched("subCategory")}
                       onChange={handleChange("subCategory")}
                     >
                       <MenuItem value="Option1">Option1</MenuItem>
@@ -164,6 +171,10 @@ const AddProductModal = ({
                       <MenuItem value="Option3">Option3</MenuItem>
                       <MenuItem value="Option4">Option4</MenuItem>
                     </Select>
+                    <ErrorMessage
+                      message={errors.subCategory}
+                      visible={touched.subCategory}
+                    />
                   </FormControl>
                 </Grid>
                 <Grid item xs={12}>
