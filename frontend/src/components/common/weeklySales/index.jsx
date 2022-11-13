@@ -1,6 +1,6 @@
 // NODE_MODULES
 import { makeStyles } from "@mui/styles";
-import { orange } from "@mui/material/colors";
+import { blue, green, lightGreen, orange } from "@mui/material/colors";
 import { useTheme, useMediaQuery } from "@material-ui/core";
 
 // LOCAL IMPORTS
@@ -19,14 +19,14 @@ const useStyles = makeStyles({
   name: {
     fontSize: 14,
     paddingLeft: 10,
+    fontWeight: 500,
   },
   unit: {
     fontSize: 14,
   },
   value: {
-    backgroundColor: orange[200] + "44",
     borderRadius: 4,
-    fontWeight: 500,
+    fontWeight: 600,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Item = ({ index, name, value }) => {
+const Item = ({ index, name, value, valueBg}) => {
   const theme = useTheme();
   const mobileDown = useMediaQuery(theme.breakpoints.down(600));
   const classes = useStyles();
@@ -45,11 +45,14 @@ const Item = ({ index, name, value }) => {
     item: {
       width: mobileDown && "100%",
     },
+    value: {
+      backgroundColor: valueBg,
+    },
   };
 
   return (
     <div className={classes.item} style={inlineStyles.item} key={index}>
-      <span className={classes.value}>{value}</span>
+      <span className={classes.value} style={inlineStyles.value}>{value}</span>
       <span className={classes.name}>{name}</span>
     </div>
   );
@@ -71,23 +74,23 @@ const WeeklySales = ({ mediaQueries }) => {
       mediaQueries={mediaQueries}
       title={"Weekly Sales"}
       subTitle={"Total Earning $44.4k"}
-      backgroundColor={"var(--primaryColor)"}
-      textColor={"var(--white)"}
+      // backgroundColor={"var(--primaryColor)"}
+      textColor={"var(--primaryText)"}
     >
       <header className={classes.unit}>In dollar($)</header>
       <div className={classes.items} style={inlineStyles.items}>
         {revenueByCategory.slice(0, 3).map((item, index) => (
-          <Item key={index} name={item.name} value={item.value} />
+          <Item key={index} name={item.name} value={item.value} valueBg={blue[100] + 80} />
         ))}
       </div>
       <div className={classes.items} style={inlineStyles.items}>
         {revenueByCategory.slice(3, 6).map((item, index) => (
-          <Item key={index} name={item.name} value={item.value} />
+          <Item key={index} name={item.name} value={item.value} valueBg={orange[100] + 80} />
         ))}
       </div>
       <div className={classes.items} style={inlineStyles.items}>
         {revenueByCategory.slice(6, 9).map((item, index) => (
-          <Item key={index} name={item.name} value={item.value} />
+          <Item key={index} name={item.name} value={item.value} valueBg={lightGreen[100] + 80} />
         ))}
       </div>
     </CardSkeleton>
