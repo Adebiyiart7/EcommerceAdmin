@@ -1,6 +1,6 @@
 import { Button } from "@mui/material";
 
-const AppButton = ({ color, className, onClick, startIcon, sx, title }) => {
+const AppButton = ({ color, className, onClick, startIcon, sx, title, type }) => {
   return (
     <Button
       sx={{fontWeight: 500, ...sx}}
@@ -10,6 +10,7 @@ const AppButton = ({ color, className, onClick, startIcon, sx, title }) => {
       disableElevation
       onClick={onClick}
       className={className}
+      type={type}
     >
       {title}
     </Button>
