@@ -4,6 +4,8 @@ import { makeStyles } from "@mui/styles";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Grid,
   IconButton,
@@ -11,6 +13,7 @@ import {
   MenuItem,
   Select,
   FormControl,
+  CircularProgress,
 } from "@mui/material";
 import { FaCamera } from "react-icons/fa";
 import { Formik } from "formik";
@@ -19,9 +22,12 @@ import { Formik } from "formik";
 import AppButton from "../../components/common/Button";
 import AppTextInput from "../../components/common/form/AppTextInput";
 import ErrorMessage from "../../components/common/ErrorMessage";
+import { reset, addProduct } from "../../features/products/productsSlice";
+import { useEffect } from "react";
 
 const useStyles = makeStyles({
   addButton: {
+    height: 36.5,
     textTransform: "capitalize !important",
     backgroundColor: "var(--primaryColor) !important",
   },
@@ -55,8 +61,19 @@ const AddProductModal = ({
   openAddProductModal,
   setOpenAddProductModal,
 }) => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const classes = useStyles();
   const { largeUp } = mediaQueries;
+  const { isLoading, isSuccess, isError, message } = useSelector(
+    (state) => state.products
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      dispatch(reset());
+    }
+  }, [dispatch, navigate, isSuccess]);
 
   const handleClose = () => {
     setOpenAddProductModal(false);
@@ -84,10 +101,19 @@ const AddProductModal = ({
           validationSchema={validationSchema}
           onSubmit={(values) => {
             // dispatch
-            console.log(JSON.stringify(values));
+            dispatch(addProduct(values));
+            // navigate("/"); // TODO update this to navigate to product detail
+            handleClose();
           }}
         >
-          {({ handleSubmit, values, errors, handleChange, touched, setFieldTouched }) => (
+          {({
+            handleSubmit,
+            values,
+            errors,
+            handleChange,
+            touched,
+            setFieldTouched,
+          }) => (
             <form onSubmit={handleSubmit}>
               <Grid item xs={12}>
                 <IconButton>
@@ -111,7 +137,6 @@ const AddProductModal = ({
                 <Grid item xs={12} sm={6}>
                   <AppTextInput
                     labelStyles={classes.label}
-                    autoFocus
                     type="text"
                     name="name"
                     label="Name"
@@ -192,6 +217,8 @@ const AddProductModal = ({
               <span>Available</span>
             </Grid> */}
               </Grid>
+              <br style={{ lineHeight: "1" }} />
+              {isError && <ErrorMessage message={message} visible={true} />}
               <DialogActions sx={{ padding: largeUp ? "32px 0" : "16px 0" }}>
                 <AppButton
                   variant="contained"
@@ -203,12 +230,25 @@ const AddProductModal = ({
                     textTransform: "capitalize",
                   }}
                 />
-                <AppButton
-                  className={classes.addButton}
-                  variant="contained"
-                  title={"Add"}
-                  type={"submit"}
-                />
+                {isLoading ? (
+                  <AppButton
+                    className={classes.addButton}
+                    variant="contained"
+                    title={
+                      <CircularProgress
+                        sx={{ color: "var(--white)" }}
+                        size={16}
+                      />
+                    }
+                  />
+                ) : (
+                  <AppButton
+                    className={classes.addButton}
+                    variant="contained"
+                    title={"Add Product"}
+                    type={"submit"}
+                  />
+                )}
               </DialogActions>
             </form>
           )}

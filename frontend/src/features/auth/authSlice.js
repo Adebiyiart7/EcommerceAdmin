@@ -16,6 +16,9 @@ export const login = createAsyncThunk("auth/login", async (data, thunkAPI) => {
     const user = await authService.login(data);
 
     if (user) {
+      if (user.isActive === false) {
+        return thunkAPI.rejectWithValue("You are not an active user!");
+      }
       // check if user is an admin or superAdmin
       if (user.isAdmin === true || user.isSuperAdmin === true) {
         localStorage.setItem("user", JSON.stringify(user));

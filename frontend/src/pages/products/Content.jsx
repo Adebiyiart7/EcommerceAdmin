@@ -1,11 +1,12 @@
 // NODE_MODULES
 import { IconButton, TextField } from "@mui/material";
 import { makeStyles } from "@mui/styles";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoMdSquareOutline } from "react-icons/io";
 import { IoEllipsisHorizontal, IoSearch } from "react-icons/io5";
 import { MdAdd } from "react-icons/md";
 import { useTheme, useMediaQuery } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
 
 // LOCAL IMPORTS
 import PageTitle from "../../components/common/PageTitle";
@@ -14,53 +15,32 @@ import ContentContainer from "../../components/ContentContainer";
 import Footer from "../../components/Footer";
 import AddProductModal from "./AddProductModal";
 import Button from "../../components/common/Button";
+import { getProducts, reset } from "../../features/products/productsSlice";
+
+const CheckBox = ({ color }) => (
+  <IconButton>
+    <IoMdSquareOutline color={color} size={20} />
+  </IconButton>
+);
+
+const Actions = ({ color }) => (
+  <IconButton>
+    <IoEllipsisHorizontal color={color} size={20} />
+  </IconButton>
+);
 
 const fields = [
-  { name: "selection", alias: "" },
+  { name: "selection", alias: <CheckBox color={"var(--white)"} /> },
   { name: "name", alias: "Name" },
   { name: "price", alias: "Price (USD)" },
   { name: "available", alias: "Available" },
   { name: "category", alias: "Category" },
-  { name: "actions", alias: "Actions" },
+  { name: "actions", alias: <Actions color={"var(--white)"} /> },
 ];
 
 const createData = (selection, name, price, available, category, actions) => {
   return { selection, name, price, available, category, actions };
 };
-
-const CheckBox = () => (
-  <IconButton>
-    <IoMdSquareOutline size={20} />
-  </IconButton>
-);
-
-const Actions = () => (
-  <IconButton>
-    <IoEllipsisHorizontal size={20} />
-  </IconButton>
-);
-
-const rows = [
-  createData(
-    <CheckBox />,
-    "Sweet oranges, less seed, more liquid",
-    29,
-    "AVAILABLE",
-    "Fruits",
-    <Actions />
-  ),
-  createData(
-    <CheckBox />,
-    "Carrot",
-    43,
-    "NOT AVAILABLE",
-    "Vegetables",
-    <Actions />
-  ),
-  createData(<CheckBox />, "Rice", 15, "AVAILABLE", "Cereals", <Actions />),
-  createData(<CheckBox />, "Beans", 31, "NOT AVAILABLE", "Pulses", <Actions />),
-  createData(<CheckBox />, "Walnut", 50, "AVAILABLE", "Seeds", <Actions />),
-];
 
 const useStyles = makeStyles({
   addButton: {
@@ -81,13 +61,41 @@ const useStyles = makeStyles({
 });
 
 const Content = ({ mediaQueries }) => {
-  const classes = useStyles();
-
   const theme = useTheme();
+  const classes = useStyles();
+  const dispatch = useDispatch();
   const { tabletDown, tabletUp } = mediaQueries;
   const [searchInput, setSearchInput] = useState("");
   const media470Down = useMediaQuery(theme.breakpoints.down(470));
   const [openAddProductModal, setOpenAddProductModal] = useState(false);
+
+  const { isLoading, isError, message, products } = useSelector(
+    (state) => state.products
+  );
+
+  useEffect(() => {
+    if (isError) {
+      console.log(message); // TODO log message in an alert window
+    }
+    dispatch(getProducts(window.location.search));
+
+    return () => dispatch(reset());
+  }, [dispatch, isError, message]);
+
+  const rows = [];
+  for (let item of products) {
+    
+    rows.push(
+      createData(
+        <CheckBox />,
+        item.name,
+        item.price,
+        item.available === true ? "AVAILABLE" : "NOT AVAILABLE",
+        item.category,
+        <Actions />
+      )
+    );
+  }
 
   const handleOnChange = (e) => setSearchInput(e.target.value);
 
@@ -147,7 +155,16 @@ const Content = ({ mediaQueries }) => {
             />
           </div>
         </div>
-        <AppTable rows={rows} fields={fields} />
+        {products.length > 0 ? (
+          isLoading ? (
+            <p>Loading...</p> // TODO Show loading component
+          ) : (
+            <AppTable rows={rows} fields={fields} />
+          )
+        ) : (
+          //TODO create an info container to diplay info
+          <p>No products to show</p>
+        )}
       </ContentContainer>
       <Footer />
     </div>
