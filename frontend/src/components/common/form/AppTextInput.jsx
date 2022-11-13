@@ -6,7 +6,7 @@ import ErrorMessage from "../ErrorMessage";
 const AppTextInput = ({ name, label, labelStyles, ...otherProps }) => {
   const { values, errors, handleChange, touched, setFieldTouched } =
     useFormikContext();
-  console.log(touched);
+  
   return (
     <div>
       <label className={labelStyles} htmlFor={name}>
