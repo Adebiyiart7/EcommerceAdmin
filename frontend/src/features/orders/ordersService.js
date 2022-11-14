@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URI = REACT_APP_API_URI + "/api/orders";
+const API_URI = process.env.REACT_APP_API_URI + "/api/orders";
 
 const getOrders = async (token) => {
   const config = {

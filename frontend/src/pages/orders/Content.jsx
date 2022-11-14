@@ -1,10 +1,10 @@
 // NODE_MODULES
-import { IconButton } from "@mui/material";
+import { useEffect } from "react";
 import { makeStyles } from "@mui/styles";
-import { IoMdSquareOutline } from "react-icons/io";
-import { IoEllipsisHorizontal } from "react-icons/io5";
 import { useTheme } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
+import { format, parseISO } from "date-fns";
+import { Link } from "react-router-dom";
 
 // LOCAL IMPORTS
 import PageTitle from "../../components/common/PageTitle";
@@ -12,6 +12,7 @@ import ContentContainer from "../../components/ContentContainer";
 import Footer from "../../components/Footer";
 import AppTable from "../../components/common/Table";
 import { getOrders, reset } from "../../features/orders/ordersSlice";
+import { colors } from "@mui/material";
 
 const fields = [
   { name: "orderID", alias: "Order No" },
@@ -25,46 +26,70 @@ const createData = (orderID, user, amount, status, date) => {
   return { orderID, user, amount, status, date };
 };
 
-const useStyles = makeStyles({});
+const useStyles = makeStyles({
+  link: {
+    color: colors.blue[700],
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    },
+  },
+  tableContainer: {
+    marginTop: 20,
+  },
+});
 
 const Content = ({ mediaQueries }) => {
   const theme = useTheme();
   const classes = useStyles();
   const dispatch = useDispatch();
   const { tabletUp } = mediaQueries;
-  const { orders, isSuccess, isError, isLoading, message } = useSelector(state => state.orders);
+  const { orders, isSuccess, isError, isLoading, message } = useSelector(
+    (state) => state.orders
+  );
 
-   const inlineStyles = {
+  const inlineStyles = {
     headerContainer: {
       marginBottom: 20,
-      display: tabletUp && "flex",
-      justifyContent: "space-between",
     },
   };
 
   useEffect(() => {
-    if (isError) console.log(message) // TODO show alert
-    
+    if (isError) console.log(message); // TODO show alert
+
     dispatch(getOrders());
 
     return () => {
       dispatch(reset());
-    }
-  }, [dispatch, isError])
-  
-const rows = [
-  createData('#12345', "Adeeyo Joseph Adebiyi", 29, "PAID", "08/02/2022"),
-  createData('#12346', "John Smith", 43, "CANCELED", "15/04/2022"),
-  createData('#12347', "Emmanuel Tony", 15, "PAID", "18/04/2022"),
-  createData('#12348', "Michael James", 31, "CANCELED", "16/06/2022"),
-  ]
-  
+    };
+  }, [dispatch, isError, message]);
+
+  const rows = [];
+
+  for (let order of orders) {
+    rows.push(
+      createData(
+        <Link className={classes.link} to="/order:id">
+          #{order.orderID}
+        </Link>,
+        `${order.first_name} ${order.last_name}`,
+        order.amount,
+        <span style={{ textDecoration: "uppercase" }}>{order.status}</span>,
+        format(parseISO(order.createdAt), "dd/MM/yyyy")
+      )
+    );
+  }
+
   return (
     <div className={classes.content}>
       <ContentContainer mediaQueries={mediaQueries}>
         <div style={inlineStyles.headerContainer}>
-          <PageTitle title="Orders" />
-          <AppTable rows={rows} fields={fields} />
+          <div>
+            <PageTitle title="Orders" />
+          </div>
+          <div className={classes.tableContainer}>
+            <AppTable rows={rows} fields={fields} />
+          </div>
         </div>
       </ContentContainer>
       <Footer />
