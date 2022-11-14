@@ -1,7 +1,7 @@
 // NODE_MODULES
 import { makeStyles } from "@mui/styles";
-import { blue, green, lightGreen, orange } from "@mui/material/colors";
 import { useTheme, useMediaQuery } from "@material-ui/core";
+import { blue, lightGreen, orange } from "@mui/material/colors";
 
 // LOCAL IMPORTS
 import CardSkeleton from "../CardSkeleton";
@@ -58,7 +58,7 @@ const Item = ({ index, name, value, valueBg}) => {
   );
 };
 
-const WeeklySales = ({ mediaQueries }) => {
+const ThisMonth = ({ mediaQueries }) => {
   const theme = useTheme();
   const mobileDown = useMediaQuery(theme.breakpoints.down(600));
   const classes = useStyles();
@@ -72,8 +72,8 @@ const WeeklySales = ({ mediaQueries }) => {
   return (
     <CardSkeleton
       mediaQueries={mediaQueries}
-      title={"Weekly Sales"}
-      subTitle={"Total Earning $44.4k"}
+      title={"This month"}
+      subTitle={"Sales this month: $44.4k"}
       // backgroundColor={"var(--primaryColor)"}
       textColor={"var(--primaryText)"}
     >
@@ -136,4 +136,4 @@ const revenueByCategory = [
   },
 ];
 
-export default WeeklySales;
+export default ThisMonth;

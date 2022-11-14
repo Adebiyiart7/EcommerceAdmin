@@ -13,6 +13,7 @@ import Home from "./pages/home/Home";
 import Login from "./pages/auth/Login";
 import { useSelector } from "react-redux";
 import Products from "./pages/products";
+import Orders from "./pages/orders";
 
 export const AppContext = createContext();
 
@@ -61,6 +62,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={privateElement(<Home />)} />
           <Route path="/products" element={privateElement(<Products />)} />
+          <Route path="/orders" element={privateElement(<Orders />)} />
         </Routes>
       </Router>
     </AppContext.Provider>

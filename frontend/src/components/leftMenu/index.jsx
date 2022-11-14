@@ -77,21 +77,21 @@ const LeftMenu = ({
             title={"Analytics"}
           />
         </Link> */}
-        <Link className={classes.menuLink} to="/">
+        <Link className={classes.menuLink} to="/orders">
           <MenuItem
             leftIcon={<BsCreditCard />}
             iconOnly={iconOnly}
             title={"Orders"}
           />
         </Link>
-        <Link className={classes.menuLink} to="/">
+        <Link className={classes.menuLink} to="/sales">
           <MenuItem
             leftIcon={<IoAnalytics />}
             iconOnly={iconOnly}
             title={"Sales"}
           />
         </Link>
-        <Link className={classes.menuLink} to="/">
+        <Link className={classes.menuLink} to="/users">
           <MenuItem
             leftIcon={<MdOutlinePeopleAlt />}
             iconOnly={iconOnly}
@@ -105,7 +105,7 @@ const LeftMenu = ({
             title={"Products"}
           />
         </Link>
-        <Link className={classes.menuLink} to="/">
+        <Link className={classes.menuLink} to="/emails">
           <MenuItem
             leftIcon={<TfiEmail />}
             iconOnly={iconOnly}
@@ -126,14 +126,14 @@ const LeftMenu = ({
             title={"Invoice"}
           />
         </Link> */}
-        <Link className={classes.menuLink} to="/">
+        <Link className={classes.menuLink} to="/settings">
           <MenuItem
             leftIcon={<FiSettings />}
             iconOnly={iconOnly}
             title={"Settings"}
           />
         </Link>
-        <Link className={classes.menuLink} to="/">
+        <Link className={classes.menuLink} to="/support">
           <MenuItem
             leftIcon={<BiSupport />}
             iconOnly={iconOnly}

@@ -4,15 +4,15 @@ import CardSkeleton from "./CardSkeleton"
 import AppTable from "./Table";
 
 const fields = [
-  { name: "name", alias: "Order No" },
+  { name: "orderID", alias: "Order No" },
   { name: "user", alias: "Full Name" },
   { name: "amount", alias: "Amount (USD)" },
   { name: "status", alias: "Status" },
   { name: "date", alias: "Date" },
 ];
 
-const createData = (name, user, amount, status, date) =>  {
-  return { name, user, amount, status, date };
+const createData = (orderID, user, amount, status, date) =>  {
+  return { orderID, user, amount, status, date };
 }
 
 const rows = [

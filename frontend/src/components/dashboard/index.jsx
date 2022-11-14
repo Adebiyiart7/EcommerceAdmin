@@ -13,7 +13,7 @@ import AnalyticsCard from "../common/AnalyticsCard";
 import SalesStats from "../common/SalesStats";
 import RecentOrder from "../common/RecentOrder";
 import NewUsers from "../common/NewUsers";
-import WeeklySales from "../common/weeklySales";
+import ThisMonth from "../common/thisMonth";
 import { IoAnalytics } from "react-icons/io5";
 
 const useStyles = makeStyles({
@@ -45,7 +45,7 @@ const Dashboard = ({ mediaQueries }) => {
           <PageTitle title="Dashboard" />
           <div style={inlineStyles.basicAnalytics}>
             <div style={{ flex: .5}}>
-              <WeeklySales mediaQueries={mediaQueries} />
+              <ThisMonth mediaQueries={mediaQueries} />
             </div>
             <div style={{ flex: .5, marginLeft: tabletUp && 24  }}>
               <AnalyticsCard
